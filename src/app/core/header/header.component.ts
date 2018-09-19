@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 // import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 import { DataStorageService } from '../../shared/data-storage.service';
-import { AuthService } from '../../auth/auth.service';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app-store.model';
 import {Observable} from 'rxjs';
 import {AuthState} from '../../auth/store/auth.model';
+import * as firebase from 'firebase';
+import * as AuthActions from '../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,6 @@ export class HeaderComponent implements OnInit {
   authState: Observable<AuthState>;
 
   constructor(private dataStorageService: DataStorageService,
-              private authService: AuthService,
               private store: Store<AppState>) {
   }
 
@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logout();
+    firebase.auth().signOut();
+    this.store.dispatch(new AuthActions.SignOut());
   }
 }

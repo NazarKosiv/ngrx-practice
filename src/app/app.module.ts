@@ -13,6 +13,9 @@ import { EffectsModule } from '@ngrx/effects';
 
 import combineReducers from './store/app-store.combined.reducers';
 import {AuthEffects} from './auth/store/auth.effects';
+import {StoreRouterConnectingModule} from '@ngrx/router-store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import {AuthEffects} from './auth/store/auth.effects';
     BrowserModule,
     StoreModule.forRoot(combineReducers()),
     EffectsModule.forRoot([AuthEffects]),
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
