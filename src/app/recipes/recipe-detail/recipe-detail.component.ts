@@ -2,11 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Recipe } from '../recipe.model';
-import {AppState} from '../../store/app-store.model';
 import {Store} from '@ngrx/store';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
 import * as RecipesActions from '../store/recipes.actions';
 import {Subscription} from 'rxjs';
+import {RecipesFeatureState} from '../store/recipes.model';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -20,7 +20,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private store: Store<AppState>) {
+              private store: Store<RecipesFeatureState>) {
   }
 
   ngOnInit() {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import {Observable} from 'rxjs';
-import {Recipes} from '../store/recipes.model';
+import {Recipes, RecipesFeatureState} from '../store/recipes.model';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app-store.model';
 
@@ -16,7 +16,7 @@ export class RecipeListComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private store: Store<AppState>) {
+              private store: Store<RecipesFeatureState>) {
   }
 
   ngOnInit() {

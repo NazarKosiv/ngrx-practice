@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 import {AuthState} from '../../auth/store/auth.model';
 import * as firebase from 'firebase';
 import * as AuthActions from '../../auth/store/auth.actions';
+import * as RecipeActions from '../../recipes/store/recipes.actions';
 
 @Component({
   selector: 'app-header',
@@ -25,16 +26,11 @@ export class HeaderComponent implements OnInit {
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes()
-      .subscribe(
-        (response) => {
-          console.log(response);
-        }
-      );
+    this.store.dispatch(new RecipeActions.StoreRecipes());
   }
 
   onFetchData() {
-    this.dataStorageService.getRecipes();
+    this.store.dispatch(new RecipeActions.FetchRecipes());
   }
 
   onLogout() {
